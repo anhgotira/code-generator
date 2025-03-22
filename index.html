@@ -3,160 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3537.COM</title>
+    <title>3537</title>
     <style>
         body {
-            font-family: 'Roboto', Arial, sans-serif;
+            font-family: 'Inter', Arial, sans-serif;
             max-width: 1000px;
             margin: 40px auto;
             padding: 20px;
-            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); /* 更深邃的渐变背景 */
-            color: #F1F5F9;
-            perspective: 800px;
+            background: #2D2D2D;
+            color: #F5F5F5;
+            line-height: 1.6;
         }
-        h1 {
+        .header-buttons {
             text-align: center;
-            color: #38BDF8; /* 更明亮的标题颜色 */
-            font-size: 2.8em;
-            margin-bottom: 50px;
-            text-shadow: 0 2px 8px rgba(56, 189, 248, 0.5);
-            transform: translateZ(15px);
-            animation: float 4s ease-in-out infinite;
+            margin-bottom: 40px;
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateZ(15px); }
-            50% { transform: translateY(-8px) translateZ(15px); }
+        .header-buttons button {
+            font-size: 2.5em;
+            font-weight: 600;
+            padding: 10px 20px;
+            margin: 0 10px;
+            background: #00CC66;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .header-buttons button:hover {
+            background: #FFCC00;
+        }
+        .header-buttons button:active {
+            background: #E6B800;
+        }
+        .header-buttons button.active {
+            background: #FFCC00;
         }
         .input-section {
-            margin-bottom: 40px;
-            background: linear-gradient(135deg, #1E293B 0%, #334155 100%); /* 更柔和的卡片背景 */
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), inset 0 1px 3px rgba(255, 255, 255, 0.05);
-            transform: translateZ(8px);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .input-section:hover {
-            transform: translateZ(15px) translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), inset 0 1px 3px rgba(255, 255, 255, 0.1);
+            margin-bottom: 30px;
+            background: #3A3A3A;
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: none;
         }
         label {
             font-weight: 600;
-            color: #38BDF8; /* 标签颜色与标题一致 */
+            color: #FFCC00;
             display: block;
-            margin-bottom: 12px;
-            font-size: 1.2em;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            margin-bottom: 8px;
+            font-size: 1.1em;
         }
         textarea, .editable-div {
             width: 100%;
-            padding: 15px;
+            padding: 12px;
             font-size: 16px;
             resize: vertical;
-            background: linear-gradient(135deg, #334155 0%, #475569 100%); /* 输入框更柔和的渐变 */
-            color: #F1F5F9;
-            border: 2px solid #64748B;
-            border-radius: 12px;
-            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2), 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, transform 0.3s ease;
-            transform: translateZ(5px);
+            background: #4A4A4A;
+            color: #F5F5F5;
+            border: none;
+            border-radius: 4px;
+            transition: background 0.3s ease;
         }
         textarea:hover, .editable-div:hover {
-            border-color: #38BDF8;
-            background: linear-gradient(135deg, #475569 0%, #5B7286 100%);
-            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(56, 189, 248, 0.3);
-            transform: translateZ(8px);
+            background: #5A5A5A;
         }
         textarea:focus, .editable-div:focus {
-            border-color: #38BDF8;
-            background: linear-gradient(135deg, #475569 0%, #5B7286 100%);
-            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2), 0 5px 20px rgba(56, 189, 248, 0.5);
-            transform: translateZ(8px);
+            background: #5A5A5A;
             outline: none;
         }
         #title {
-            min-height: 50px;
+            min-height: 40px;
         }
         #content {
-            min-height: 160px;
+            min-height: 140px;
             white-space: pre-wrap;
         }
         .toolbar {
-            margin: 20px 0;
+            margin: 15px 0;
             display: flex;
-            gap: 15px;
+            gap: 10px;
             flex-wrap: wrap;
             align-items: center;
         }
+        .align-toolbar {
+            margin-bottom: 10px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
         button, select {
-            padding: 14px 28px;
+            padding: 10px 20px;
             font-size: 16px;
             border: none;
-            border-radius: 12px;
+            border-radius: 4px;
             cursor: pointer;
-            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            transition: background 0.3s ease;
         }
         button {
-            background: linear-gradient(135deg, #F97316 0%, #FBBF24 100%); /* 更鲜艳的按钮渐变 */
+            background: #00CC66;
             color: #FFFFFF;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 5px 15px rgba(249, 115, 22, 0.4), inset 0 1px 3px rgba(255, 255, 255, 0.2);
-            transform: translateZ(8px);
             font-weight: 600;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         }
         button:hover {
-            background: linear-gradient(135deg, #FBBF24 0%, #F97316 100%);
-            transform: translateZ(12px) translateY(-2px);
-            box-shadow: 0 8px 20px rgba(249, 115, 22, 0.5), inset 0 1px 3px rgba(255, 255, 255, 0.3), 0 0 10px rgba(249, 115, 22, 0.4);
+            background: #FFCC00;
         }
         button:active {
-            transform: translateZ(5px) scale(0.95);
-            box-shadow: 0 3px 10px rgba(249, 115, 22, 0.3), inset 0 1px 3px rgba(255, 255, 255, 0.2);
+            background: #E6B800;
         }
         select {
-            background: linear-gradient(135deg, #334155 0%, #475569 100%); /* 下拉框与输入框一致 */
-            border: 2px solid #64748B;
-            color: #F1F5F9;
-            padding: 12px;
-            border-radius: 12px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            transform: translateZ(5px);
+            background: #4A4A4A;
+            color: #F5F5F5;
+            padding: 10px;
         }
         select:focus {
-            border-color: #38BDF8;
-            box-shadow: 0 5px 15px rgba(56, 189, 248, 0.3);
             outline: none;
         }
         select option {
-            background: #334155;
-            color: #38BDF8;
+            background: #4A4A4A;
+            color: #FFCC00;
         }
         #output {
             white-space: pre-wrap;
-            padding: 20px;
-            border: 2px solid #64748B;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #1E293B 0%, #334155 100%); /* 输出框更深邃 */
-            color: #E5E7EB;
+            padding: 15px;
+            border-radius: 4px;
+            background: #3A3A3A;
+            color: #E0E0E0;
             margin-top: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-            transform: translateZ(5px);
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'JetBrains Mono', monospace;
             position: relative;
         }
         #bottom-preview {
             margin-top: 10px;
-            padding: 15px;
-            border: 2px solid #64748B;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #334155 0%, #475569 100%);
-            min-height: 60px;
+            padding: 12px;
+            border-radius: 4px;
+            background: #4A4A4A;
+            min-height: 50px;
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            transform: translateZ(5px);
         }
         #content img.button-img {
             width: 100px;
@@ -166,28 +148,37 @@
             width: 30px;
             vertical-align: middle;
         }
+        #content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        #content td {
+            border: 1px solid #FFFFFF;
+            padding: 8px;
+            text-align: center;
+        }
         .action-buttons {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             justify-content: center;
-            margin-top: 40px;
+            margin-top: 30px;
         }
         .divider {
-            border-top: 1px solid #64748B; /* 分割线颜色更柔和 */
-            margin: 40px 0;
+            border-top: 1px solid #5A5A5A;
+            margin: 30px 0;
         }
         .copy-success {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(56, 189, 248, 0.9); /* 与主题色一致 */
-            color: #FFFFFF;
-            padding: 15px 30px;
-            border-radius: 10px;
-            font-size: 1.2em;
+            background: #FFCC00;
+            color: #2D2D2D;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 1.1em;
             font-weight: 600;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             opacity: 0;
             transition: opacity 0.3s ease;
             z-index: 1000;
@@ -198,7 +189,10 @@
     </style>
 </head>
 <body>
-    <h1>✨ 3537.COM ✨</h1>
+    <div class="header-buttons">
+        <button id="btn-3537" class="active" onclick="switchMode('3537')">✨ 3537 ✨</button>
+        <button id="btn-6167" onclick="switchMode('6167')">✨ 6167 ✨</button>
+    </div>
 
     <div class="input-section">
         <label>📝 主题</label>
@@ -207,9 +201,18 @@
 
     <div class="input-section">
         <label>📋 内容</label>
+        <div class="align-toolbar">
+            <button onclick="alignText('left')">⬅️ 左对齐</button>
+            <button onclick="alignText('center')">↔️ 居中对齐</button>
+            <button onclick="alignText('right')">➡️ 右对齐</button>
+            <button onclick="addTable()">📊 添加表格</button>
+            <button onclick="formatText('bold')">𝐁 加粗</button>
+            <button onclick="formatText('italic')">𝐼 斜体</button>
+            <button onclick="formatText('underline')">𝐔 下划线</button>
+        </div>
         <div id="content" class="editable-div" contenteditable="true" oninput="updateContent()"></div>
         <div class="toolbar">
-            <button onclick="changeSelectedColor()">🎨 选中内容变色</button>
+            <button onclick="changeSelectedColor()">🎨 颜色</button>
             <button onclick="addButton()">➕ 添加按钮</button>
             <select id="emojiSelect" onchange="addEmoji()">
                 <option value="">选择游戏 Emoji</option>
@@ -242,6 +245,7 @@
                 <option value="5号20号">5号20号</option>
                 <option value="免费代码">免费代码</option>
             </select>
+            <button onclick="cancelBottomContent()">❌ 取消</button>
         </div>
         <div>底部预览:</div>
         <div id="bottom-preview"></div>
@@ -250,10 +254,9 @@
     <div class="divider"></div>
 
     <div class="action-buttons">
-        <button onclick="generateCode()">📦 生成代码</button>
         <button onclick="copyCode()">📄 复制代码</button>
     </div>
-    <pre id="output">请点击“生成代码”按钮以生成代码</pre>
+    <pre id="output">请填写内容以生成代码</pre>
 
     <script>
         const emojiMap = {
@@ -280,10 +283,52 @@
             "免费代码": { img: "https://res.cloudinary.com/daw3jjnsf/image/upload/v1742348920/6_z8m3dy.png", url: "https://3537s.com/#/giftcode?game_type=11001&game_mode=1&anim_type=2" }
         };
 
+        let currentMode = '3537'; // 默认模式为 3537
         let bottomContent = "";
         let isJumpButton = false;
         let contentData = [];
         let generatedCode = "";
+        let buttonConfig = {
+            '3537': {
+                buttonImg: "https://res.cloudinary.com/daw3jjnsf/image/upload/v1741951273/button_-_3_ddqvtq.png",
+                buttonUrl: "#/giftcode",
+                jumpButtonImg: "https://res.cloudinary.com/daw3jjnsf/image/upload/v1741934211/3537_BUTTON_4_mty74n.gif",
+                jumpButtonUrl: "https://t.me/+9LQsBIYNZucxMmU1"
+            },
+            '6167': {
+                buttonImg: "https://res.cloudinary.com/daw3jjnsf/image/upload/v1742470970/button_1_dihd5x.png",
+                buttonUrl: "https://6167222.com/#/giftcode",
+                jumpButtonImg: "https://res.cloudinary.com/daw3jjnsf/image/upload/v1742470964/6167_button_1_zi62sd.gif",
+                jumpButtonUrl: "https://t.me/+qBIuPiTwI0U1NzA1"
+            }
+        };
+
+        function switchMode(mode) {
+            currentMode = mode;
+            const btn3537 = document.getElementById('btn-3537');
+            const btn6167 = document.getElementById('btn-6167');
+            const bannerSelect = document.getElementById('bannerSelect');
+
+            // 更新按钮高亮状态
+            if (mode === '3537') {
+                btn3537.classList.add('active');
+                btn6167.classList.remove('active');
+                bannerSelect.style.display = 'inline-block'; // 显示“选择横幅”
+                document.title = '3537';
+            } else {
+                btn3537.classList.remove('active');
+                btn6167.classList.add('active');
+                bannerSelect.style.display = 'none'; // 隐藏“选择横幅”
+                if (bottomContent && !isJumpButton) {
+                    bottomContent = ""; // 如果当前底部内容是横幅，切换到 6167 模式时清空
+                    document.getElementById("bottom-preview").innerHTML = "";
+                }
+                document.title = '6167';
+            }
+
+            // 更新页面标题
+            generateCode();
+        }
 
         document.getElementById("content").addEventListener("keydown", function(e) {
             if (e.key === "Enter") {
@@ -457,7 +502,70 @@
             updateContent();
         });
 
-        function changeSelectedColor() {
+        function alignText(alignment) {
+            const content = document.getElementById("content");
+            const selection = window.getSelection();
+            if (!selection.rangeCount || !selection.getRangeAt(0).commonAncestorContainer.parentNode.closest("#content")) return;
+
+            const range = selection.getRangeAt(0);
+            if (range.collapsed) return;
+
+            const td = range.commonAncestorContainer.parentNode.closest("td");
+            if (td) {
+                const fragment = range.extractContents();
+                const alignDiv = document.createElement("div");
+                alignDiv.style.textAlign = alignment;
+                alignDiv.appendChild(fragment);
+                range.insertNode(alignDiv);
+
+                const newRange = document.createRange();
+                const lastChild = alignDiv.lastChild;
+                if (lastChild.nodeType === Node.TEXT_NODE) {
+                    newRange.setStart(lastChild, lastChild.length);
+                    newRange.setEnd(lastChild, lastChild.length);
+                } else if (lastChild.nodeType === Node.ELEMENT_NODE) {
+                    newRange.setStartAfter(lastChild);
+                    newRange.setEndAfter(lastChild);
+                } else {
+                    newRange.setStart(alignDiv, alignDiv.childNodes.length);
+                    newRange.setEnd(alignDiv, alignDiv.childNodes.length);
+                }
+                selection.removeAllRanges();
+                selection.addRange(newRange);
+            } else {
+                const fragment = range.extractContents();
+                const alignDiv = document.createElement("div");
+                alignDiv.style.textAlign = alignment;
+                alignDiv.appendChild(fragment);
+                range.insertNode(alignDiv);
+
+                let nextSibling = alignDiv.nextSibling;
+                while (nextSibling && (nextSibling.nodeName === "BR" || (nextSibling.nodeType === Node.TEXT_NODE && nextSibling.textContent.trim() === ""))) {
+                    const toRemove = nextSibling;
+                    nextSibling = nextSibling.nextSibling;
+                    toRemove.remove();
+                }
+
+                const newRange = document.createRange();
+                const lastChild = alignDiv.lastChild;
+                if (lastChild.nodeType === Node.TEXT_NODE) {
+                    newRange.setStart(lastChild, lastChild.length);
+                    newRange.setEnd(lastChild, lastChild.length);
+                } else if (lastChild.nodeType === Node.ELEMENT_NODE) {
+                    newRange.setStartAfter(lastChild);
+                    newRange.setEndAfter(lastChild);
+                } else {
+                    newRange.setStart(alignDiv, alignDiv.childNodes.length);
+                    newRange.setEnd(alignDiv, alignDiv.childNodes.length);
+                }
+                selection.removeAllRanges();
+                selection.addRange(newRange);
+            }
+
+            updateContent();
+        }
+
+        function formatText(format) {
             const content = document.getElementById("content");
             const selection = window.getSelection();
             if (!selection.rangeCount || !selection.getRangeAt(0).commonAncestorContainer.parentNode.closest("#content")) return;
@@ -466,110 +574,104 @@
             const selectedText = range.toString();
             if (!selectedText) return;
 
-            let colorPicker = document.getElementById("colorPicker");
-            if (!colorPicker) {
-                colorPicker = document.createElement("div");
-                colorPicker.id = "colorPicker";
-                colorPicker.style.cssText = `
-                    position: absolute;
-                    background: #1E293B;
-                    padding: 15px;
-                    border-radius: 12px;
-                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-                    z-index: 1000;
-                    max-height: 300px;
-                    overflow-y: auto;
-                    display: grid;
-                    grid-template-columns: repeat(5, 1fr);
-                    gap: 10px;
-                `;
-                document.body.appendChild(colorPicker);
+            const span = document.createElement("span");
+            if (format === "bold") {
+                span.style.fontWeight = "bold";
+            } else if (format === "italic") {
+                span.style.fontStyle = "italic";
+            } else if (format === "underline") {
+                span.style.textDecoration = "underline";
+            }
+            span.textContent = selectedText;
+            range.deleteContents();
+            range.insertNode(span);
+
+            const newRange = document.createRange();
+            newRange.setStartAfter(span);
+            newRange.collapse(true);
+            selection.removeAllRanges();
+            selection.addRange(newRange);
+
+            updateContent();
+        }
+
+        function addTable() {
+            const rows = parseInt(prompt("请输入表格行数：", "2"));
+            const cols = parseInt(prompt("请输入表格列数：", "2"));
+
+            if (!rows || !cols || rows <= 0 || cols <= 0) {
+                alert("请输入有效的行数和列数！");
+                return;
             }
 
-            const colors = [
-                "#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#FF00FF", "#00FFFF", "#800000", "#008000", "#000080",
-                "#808000", "#800080", "#008080", "#C0C0C0", "#808080", "#FFA500", "#A52A2A", "#D2691E", "#DC143C",
-                "#FF4500", "#2E8B57", "#ADFF2F", "#9ACD32", "#228B22", "#6A5ACD", "#483D8B", "#7B68EE", "#BA55D3",
-                "#9932CC", "#8A2BE2", "#9400D3", "#FFD700", "#DAA520", "#B8860B", "#CD853F", "#F4A460", "#DEB887",
-                "#BC8F8F", "#F08080", "#FA8072", "#E9967A", "#FF6347", "#FF7F50", "#CD5C5C", "#B22222", "#8B0000",
-                "#FFA07A", "#FF8C00", "#FFDAB9", "#EEE8AA", "#BDB76B", "#F0E68C", "#FFFFE0", "#98FB98", "#90EE90",
-                "#00FF7F", "#7FFF00", "#7CFC00", "#ADFF2F", "#32CD32", "#00FA9A", "#00CED1", "#40E0D0", "#48D1CC",
-                "#20B2AA", "#5F9EA0", "#B0E0E6", "#ADD8E6", "#87CEEB", "#87CEFA", "#00B7EB", "#1E90FF", "#4169E1",
-                "#6495ED", "#4682B4", "#B0C4DE", "#778899", "#E6E6FA", "#D8BFD8", "#DDA0DD", "#EE82EE", "#DA70D6",
-                "#FF00FF", "#C71585", "#DB7093", "#FFB6C1", "#FF69B4", "#FF1493", "#C71585", "#F0F8FF", "#F5F5DC",
-                "#FFF8DC", "#FFFACD", "#FAFAD2", "#FFFFF0", "#F0FFF0", "#F0FFFF", "#E0FFFF", "#AFEEEE", "#7FFFD4",
-                "#66CDAA", "#00FFFF", "#E0FFFF", "#00CED1", "#40E0D0", "#48D1CC", "#20B2AA", "#5F9EA0", "#4682B4",
-                "#B0C4DE", "#778899", "#708090", "#2F4F4F", "#191970", "#000080", "#00008B", "#0000CD", "#0000FF",
-                "#1E90FF", "#00B7EB", "#87CEFA", "#87CEEB", "#ADD8E6", "#B0E0E6", "#E6E6FA", "#DDA0DD", "#EE82EE",
-                "#DA70D6", "#FF00FF", "#BA55D3", "#9370DB", "#8A2BE2", "#9400D3", "#9932CC", "#4B0082", "#6A5ACD"
-            ];
+            const content = document.getElementById("content");
+            const table = document.createElement("table");
+            table.dataset.code = `<table style="width: 100%; border-collapse: collapse; margin: 10px 0;">`;
 
-            colorPicker.innerHTML = "";
-            colors.forEach(color => {
-                const colorBox = document.createElement("div");
-                colorBox.style.cssText = `
-                    width: 30px;
-                    height: 30px;
-                    background: ${color};
-                    border-radius: 5px;
-                    cursor: pointer;
-                    border: 2px solid #64748B;
-                    transition: transform 0.2s ease;
-                `;
-                colorBox.addEventListener("mouseover", () => {
-                    colorBox.style.transform = "scale(1.1)";
-                });
-                colorBox.addEventListener("mouseout", () => {
-                    colorBox.style.transform = "scale(1)";
-                });
-                colorBox.addEventListener("click", () => {
-                    applyColor(color);
-                    colorPicker.remove();
-                });
-                colorPicker.appendChild(colorBox);
-            });
-
-            const rect = range.getBoundingClientRect();
-            colorPicker.style.left = `${rect.left + window.scrollX}px`;
-            colorPicker.style.top = `${rect.bottom + window.scrollY + 5}px`;
-
-            const closePicker = (e) => {
-                if (!colorPicker.contains(e.target)) {
-                    colorPicker.remove();
-                    document.removeEventListener("click", closePicker);
+            for (let i = 0; i < rows; i++) {
+                const tr = document.createElement("tr");
+                table.dataset.code += "<tr>";
+                for (let j = 0; j < cols; j++) {
+                    const td = document.createElement("td");
+                    td.textContent = " ";
+                    tr.appendChild(td);
+                    table.dataset.code += `<td style="border: 1px solid #FFFFFF; padding: 8px; text-align: center;"> </td>`;
                 }
-            };
-            setTimeout(() => document.addEventListener("click", closePicker), 0);
-
-            function applyColor(color) {
-                const coloredSpan = document.createElement("span");
-                coloredSpan.style.color = color;
-                coloredSpan.textContent = selectedText;
-                range.deleteContents();
-                range.insertNode(coloredSpan);
-
-                const defaultSpan = document.createElement("span");
-                defaultSpan.style.color = "#000000";
-                defaultSpan.textContent = "";
-                range.insertNode(defaultSpan);
-
-                selection.removeAllRanges();
-                const newRange = document.createRange();
-                newRange.setStart(defaultSpan, 0);
-                newRange.collapse(true);
-                selection.addRange(newRange);
-
-                updateContent();
+                table.dataset.code += "</tr>";
+                table.appendChild(tr);
             }
+            table.dataset.code += "</table>";
+
+            const selection = window.getSelection();
+            if (selection.rangeCount > 0 && selection.getRangeAt(0).commonAncestorContainer.parentNode.closest("#content")) {
+                const range = selection.getRangeAt(0);
+                range.insertNode(table);
+                range.setStartAfter(table);
+                range.collapse(true);
+                selection.removeAllRanges();
+                selection.addRange(range);
+            } else {
+                content.appendChild(table);
+            }
+            updateContent();
+        }
+
+        function changeSelectedColor() {
+             const content = document.getElementById("content");
+            const selection = window.getSelection();
+            if (!selection.rangeCount || !selection.getRangeAt(0).commonAncestorContainer.parentNode.closest("#content")) return;
+
+            const range = selection.getRangeAt(0);
+            const selectedText = range.toString();
+            if (!selectedText) return;
+
+            const coloredSpan = document.createElement("span");
+            coloredSpan.style.color = "#CAFF70";
+            coloredSpan.textContent = selectedText;
+            range.deleteContents();
+            range.insertNode(coloredSpan);
+
+            const defaultSpan = document.createElement("span");
+            defaultSpan.style.color = "#000000";
+            defaultSpan.textContent = "";
+            range.insertNode(defaultSpan);
+
+            selection.removeAllRanges();
+            const newRange = document.createRange();
+            newRange.setStart(defaultSpan, 0);
+            newRange.collapse(true);
+            selection.addRange(newRange);
+
+            updateContent();
         }
 
         function addButton() {
             const content = document.getElementById("content");
             const img = document.createElement("img");
-            img.src = "https://res.cloudinary.com/daw3jjnsf/image/upload/v1741951273/button_-_3_ddqvtq.png";
+            img.src = buttonConfig[currentMode].buttonImg;
             img.alt = "Botão";
             img.className = "button-img";
-            img.dataset.code = `<a href="#/giftcode" target="_self"><img src="https://res.cloudinary.com/daw3jjnsf/image/upload/v1741951273/button_-_3_ddqvtq.png" alt="Botão" style="vertical-align: middle; width: 25%; filter: drop-shadow(0 0 10px #CAFF70);"/></a>`;
+            img.dataset.code = `<a href="${buttonConfig[currentMode].buttonUrl}" target="_self"><img src="${buttonConfig[currentMode].buttonImg}" alt="Botão" style="vertical-align: middle; width: 25%; filter: drop-shadow(0 0 10px #CAFF70);"/></a>`;
 
             const selection = window.getSelection();
             if (selection.rangeCount > 0 && selection.getRangeAt(0).commonAncestorContainer.parentNode.closest("#content")) {
@@ -613,10 +715,11 @@
         }
 
         function addJumpButton() {
-            bottomContent = `<a href="https://t.me/+9LQsBIYNZucxMmU1" target="_blank"><img src="https://res.cloudinary.com/daw3jjnsf/image/upload/v1741934211/3537_BUTTON_4_mty74n.gif" style="width: 80%; height: auto; margin-top: 10px; display:block; margin-left:auto; margin-right:auto;"/></a></div>`;
+            bottomContent = `<a href="${buttonConfig[currentMode].jumpButtonUrl}" target="_blank"><img src="${buttonConfig[currentMode].jumpButtonImg}" style="width: 80%; height: auto; margin-top: 10px; display:block; margin-left:auto; margin-right:auto;"/></a></div>`;
             isJumpButton = true;
             const preview = document.getElementById("bottom-preview");
-            preview.innerHTML = `<img src="https://res.cloudinary.com/daw3jjnsf/image/upload/v1741934211/3537_BUTTON_4_mty74n.gif" style="width: 200px; height: auto;"/>`;
+            preview.innerHTML = `<img src="${buttonConfig[currentMode].jumpButtonImg}" style="width: 200px; height: auto;"/>`;
+            generateCode();
         }
 
         function addBanner() {
@@ -627,8 +730,17 @@
                 isJumpButton = false;
                 const preview = document.getElementById("bottom-preview");
                 preview.innerHTML = `<img src="${bannerMap[value].img}" style="width: 300px; height: auto;"/>`;
+                generateCode();
             }
             select.value = "";
+        }
+
+        function cancelBottomContent() {
+            bottomContent = "";
+            isJumpButton = false;
+            const preview = document.getElementById("bottom-preview");
+            preview.innerHTML = "";
+            generateCode();
         }
 
         function updateContent() {
@@ -642,36 +754,77 @@
                         contentData.push({ type: "text", value: text });
                     }
                 } else if (node.nodeName === "SPAN") {
-                    contentData.push({ type: "span", value: node.textContent, color: node.style.color });
+                    const styles = {};
+                    if (node.style.color) styles.color = node.style.color;
+                    if (node.style.fontWeight === "bold") styles.fontWeight = "bold";
+                    if (node.style.fontStyle === "italic") styles.fontStyle = "italic";
+                    if (node.style.textDecoration === "underline") styles.textDecoration = "underline";
+                    contentData.push({ type: "span", value: node.textContent, styles: styles });
+                } else if (node.nodeName === "DIV" && node !== content) {
+                    contentData.push({ type: "div_start", align: node.style.textAlign });
+                    node.childNodes.forEach(child => processNode(child, true));
+                    contentData.push({ type: "div_end" });
+                } else if (node.nodeName === "TABLE") {
+                    const tableCode = generateTableCode(node);
+                    contentData.push({ type: "table", code: tableCode });
                 } else if (node.nodeName === "IMG") {
                     contentData.push({ type: "img", code: node.dataset.code });
                 } else if (node.nodeName === "BR") {
                     contentData.push({ type: "br" });
-                } else if (node.nodeName === "DIV" && node !== content) {
-                    let hasContent = false;
-                    node.childNodes.forEach(child => {
-                        if (child.nodeType === Node.TEXT_NODE && child.textContent.trim()) {
-                            hasContent = true;
-                        } else if (child.nodeName === "SPAN" || child.nodeName === "IMG") {
-                            hasContent = true;
-                        }
-                        processNode(child, true);
-                    });
-                    if (hasContent && !isLastDiv(node, content)) {
-                        contentData.push({ type: "br" });
-                    }
                 } else {
                     node.childNodes.forEach(child => processNode(child, isNestedDiv));
                 }
             }
 
-            function isLastDiv(node, parent) {
-                const siblings = Array.from(parent.childNodes);
-                const divs = siblings.filter(n => n.nodeName === "DIV" && n !== parent);
-                return divs.length > 0 && divs[divs.length - 1] === node;
+            function processTdContent(node) {
+                let tdContent = "";
+                if (node.nodeType === Node.TEXT_NODE) {
+                    tdContent += node.textContent;
+                } else if (node.nodeName === "DIV") {
+                    const divContent = Array.from(node.childNodes).map(child => processTdContent(child)).join('');
+                    tdContent += `<div style="text-align:${node.style.textAlign};">${divContent}</div>`;
+                } else if (node.nodeName === "SPAN") {
+                    const styles = [];
+                    if (node.style.color) styles.push(`color:${node.style.color}`);
+                    if (node.style.fontWeight === "bold") styles.push(`font-weight:bold`);
+                    if (node.style.fontStyle === "italic") styles.push(`font-style:italic`);
+                    if (node.style.textDecoration === "underline") styles.push(`text-decoration:underline`);
+                    const spanContent = Array.from(node.childNodes).map(child => processTdContent(child)).join('');
+                    tdContent += `<span style="${styles.join(';')}">${spanContent}</span>`;
+                } else if (node.nodeName === "IMG") {
+                    tdContent += node.dataset.code;
+                } else if (node.nodeName === "BR") {
+                    tdContent += "<br>";
+                } else {
+                    node.childNodes.forEach(child => {
+                        tdContent += processTdContent(child);
+                    });
+                }
+                return tdContent;
+            }
+
+            function generateTableCode(table) {
+                let code = `<table style="width: 100%; border-collapse: collapse; margin: 10px 0;">`;
+                const rows = table.getElementsByTagName("tr");
+                for (let i = 0; i < rows.length; i++) {
+                    code += "<tr>";
+                    const cells = rows[i].getElementsByTagName("td");
+                    for (let j = 0; j < cells.length; j++) {
+                        const td = cells[j];
+                        let tdContent = "";
+                        td.childNodes.forEach(child => {
+                            tdContent += processTdContent(child);
+                        });
+                        code += `<td style="border: 1px solid #FFFFFF; padding: 8px; text-align: center;">${tdContent}</td>`;
+                    }
+                    code += "</tr>";
+                }
+                code += "</table>";
+                return code;
             }
 
             content.childNodes.forEach(node => processNode(node));
+            generateCode();
         }
 
         function generateCode() {
@@ -682,23 +835,31 @@
             }
             output += `<span style="color:#FFFFFF;">`;
 
-            contentData.forEach(item => {
+            let inDiv = false;
+            contentData.forEach((item, index) => {
                 if (item.type === "text") {
-                    const lines = item.value.split('\n');
-                    lines.forEach((line, index) => {
-                        if (line) {
-                            output += line;
-                        }
-                        if (index < lines.length - 1) {
-                            output += "\n";
-                        }
-                    });
+                    output += item.value;
                 } else if (item.type === "span") {
-                    output += `<span style="color:${item.color};">${item.value}</span>`;
+                    const styles = [];
+                    if (item.styles.color) styles.push(`color:${item.styles.color}`);
+                    if (item.styles.fontWeight) styles.push(`font-weight:${item.styles.fontWeight}`);
+                    if (item.styles.fontStyle) styles.push(`font-style:${item.styles.fontStyle}`);
+                    if (item.styles.textDecoration) styles.push(`text-decoration:${item.styles.textDecoration}`);
+                    output += `<span style="${styles.join(';')}">${item.value}</span>`;
+                } else if (item.type === "div_start") {
+                    output += `<div style="text-align:${item.align};">`;
+                    inDiv = true;
+                } else if (item.type === "div_end") {
+                    output += `</div>`;
+                    inDiv = false;
+                } else if (item.type === "table") {
+                    output += item.code;
                 } else if (item.type === "img") {
                     output += item.code;
                 } else if (item.type === "br") {
-                    output += "\n";
+                    if (!inDiv || (index < contentData.length - 1 && contentData[index + 1].type !== "div_end")) {
+                        output += "\n";
+                    }
                 }
             });
 
@@ -712,13 +873,13 @@
             } else {
                 output += "</div>";
             }
-            generatedCode = output || "请填写内容";
+            generatedCode = output || "请填写内容以生成代码";
             document.getElementById("output").textContent = generatedCode;
         }
 
         function copyCode() {
-            if (!generatedCode) {
-                alert("请先点击“生成代码”按钮生成代码！");
+            if (!generatedCode || generatedCode === "请填写内容以生成代码") {
+                alert("请填写内容以生成代码！");
                 return;
             }
             navigator.clipboard.writeText(generatedCode);
@@ -738,6 +899,7 @@
         }
 
         document.getElementById("title").addEventListener("input", updateContent);
+        generateCode();
     </script>
 </body>
 </html>
