@@ -7,22 +7,31 @@
     <style>
         body {
             font-family: 'Inter', Arial, sans-serif;
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 20px;
+            margin: 0;
+            padding: 0;
             background: #2D2D2D;
             color: #F5F5F5;
             line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .main-container {
+            max-width: 60vw;
+            margin-left: 20px;
+            padding: 20px;
+            flex: 1;
+            overflow-y: auto;
         }
         .header-buttons {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
         .header-buttons button {
-            font-size: 2.5em;
+            font-size: 2em;
             font-weight: 600;
-            padding: 10px 20px;
-            margin: 0 10px;
+            padding: 8px 16px;
+            margin: 0 8px;
             background: #00CC66;
             color: #FFFFFF;
             border: none;
@@ -40,9 +49,9 @@
             background: #FFCC00;
         }
         .input-section {
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             background: #3A3A3A;
-            padding: 20px;
+            padding: 15px;
             border-radius: 6px;
             box-shadow: none;
         }
@@ -50,13 +59,13 @@
             font-weight: 600;
             color: #FFCC00;
             display: block;
-            margin-bottom: 8px;
-            font-size: 1.1em;
+            margin-bottom: 6px;
+            font-size: 1em;
         }
         textarea, .editable-div {
             width: 100%;
-            padding: 12px;
-            font-size: 16px;
+            padding: 10px;
+            font-size: 14px;
             resize: vertical;
             background: #4A4A4A;
             color: #F5F5F5;
@@ -72,28 +81,22 @@
             outline: none;
         }
         #title {
-            min-height: 40px;
+            min-height: 30px;
         }
         #content {
-            min-height: 140px;
+            min-height: 120px;
             white-space: pre-wrap;
         }
-        .toolbar {
-            margin: 15px 0;
+        .toolbar, .align-toolbar {
+            margin: 10px 0;
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
             align-items: center;
         }
-        .align-toolbar {
-            margin-bottom: 10px;
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
         button, select {
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 8px 16px;
+            font-size: 14px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
@@ -113,7 +116,7 @@
         select {
             background: #4A4A4A;
             color: #F5F5F5;
-            padding: 10px;
+            padding: 8px;
         }
         select:focus {
             outline: none;
@@ -124,49 +127,53 @@
         }
         #output {
             white-space: pre-wrap;
-            padding: 15px;
+            padding: 12px;
             border-radius: 4px;
             background: #3A3A3A;
             color: #E0E0E0;
-            margin-top: 20px;
+            margin-top: 15px;
             font-family: 'JetBrains Mono', monospace;
             position: relative;
         }
         #bottom-preview {
-            margin-top: 10px;
-            padding: 12px;
+            margin-top: 8px;
+            padding: 10px;
             border-radius: 4px;
             background: #4A4A4A;
-            min-height: 50px;
+            min-height: 40px;
             text-align: center;
         }
         #content img.button-img {
-            width: 100px;
+            width: 80px;
             vertical-align: middle;
         }
         #content img.emoji-img {
-            width: 30px;
+            width: 25px;
             vertical-align: middle;
         }
         #content table {
             width: 100%;
+            max-width: 100%;
             border-collapse: collapse;
-            margin: 10px 0;
+            margin: 8px 0;
+            table-layout: fixed;
         }
         #content td {
             border: 1px solid #FFFFFF;
-            padding: 8px;
+            padding: 6px;
             text-align: center;
+            word-break: break-all;
+            overflow-wrap: break-word;
         }
         .action-buttons {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             justify-content: center;
-            margin-top: 30px;
+            margin-top: 20px;
         }
         .divider {
             border-top: 1px solid #5A5A5A;
-            margin: 30px 0;
+            margin: 20px 0;
         }
         .copy-success {
             position: absolute;
@@ -175,9 +182,9 @@
             transform: translate(-50%, -50%);
             background: #FFCC00;
             color: #2D2D2D;
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 4px;
-            font-size: 1.1em;
+            font-size: 1em;
             font-weight: 600;
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -186,77 +193,298 @@
         .copy-success.show {
             opacity: 1;
         }
+        /* 手机预览样式 */
+        .phone-preview {
+            position: fixed;
+            right: 100px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 375px;
+            height: 667px;
+            background: #121212;
+            border-radius: 40px;
+            border: 12px solid #1A1A1A;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.9), inset 0 0 15px rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+        }
+        .phone-status-bar {
+            height: 32px;
+            background: #1A1A1A;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 12px;
+            color: #FFF;
+            font-size: 11px;
+        }
+        .phone-status-bar .status-icons-left {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .phone-status-bar .status-icons-right {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .phone-status-bar .signal-icon::before {
+            content: "📶";
+        }
+        .phone-status-bar .wifi-icon::before {
+            content: "📡";
+        }
+        .phone-status-bar .notification-icon::before {
+            content: "🔔";
+        }
+        .phone-status-bar .bluetooth-icon::before {
+            content: "🔵";
+        }
+        .phone-status-bar .battery-icon::before {
+            content: "🔋";
+        }
+        .phone-status-bar .phone-time {
+            flex: 1;
+            text-align: center;
+        }
+        .phone-content {
+            flex: 1;
+            background: #121212;
+            padding: 8px;
+            overflow-y: auto;
+            font-family: Arial, sans-serif;
+            margin-bottom: 0;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .phone-content::-webkit-scrollbar {
+            display: none;
+        }
+        .phone-header {
+            font-size: 14px;
+            font-weight: bold;
+            color: #FFF;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+        .phone-subheader {
+            font-size: 12px;
+            color: #FFF;
+            margin-bottom: 4px;
+        }
+        .phone-timestamp {
+            font-size: 10px;
+            color: #999;
+            margin-bottom: 8px;
+        }
+        .phone-body {
+            font-size: 12px;
+            color: #FFF;
+            background: #121212;
+        }
+        .message-box {
+            background: linear-gradient(145deg, #2A2A2A, #1E1E1E);
+            border-radius: 20px;
+            padding: 12px;
+            margin-bottom: 8px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), 0 4px 15px rgba(0, 0, 0, 0.6);
+            color: #FFF;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            border: 1px solid #4A4A4A;
+            line-height: 1.4;
+            opacity: 0.95;
+        }
+        .message-box img {
+            max-width: 100%;
+            height: auto;
+        }
+        .message-timestamp {
+            font-size: 10px;
+            color: #666;
+            text-align: right;
+            margin-top: 4px;
+        }
+        .phone-nav-bar {
+            height: 44px;
+            background: #121212;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #3A3A3A;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+        }
+        .phone-nav-bar span {
+            font-size: 16px;
+            color: #FFF;
+            cursor: pointer;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: transform 0.2s ease, background 0.3s ease;
+        }
+        .phone-nav-bar span:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+        .phone-nav-bar span:active {
+            transform: scale(0.9);
+        }
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            .main-container {
+                max-width: 95vw;
+                margin: 0 auto;
+                padding: 10px;
+            }
+            .phone-preview {
+                position: relative;
+                width: 100%;
+                max-width: 375px;
+                height: 667px;
+                margin: 20px auto;
+                right: 0;
+                top: 0;
+                transform: none;
+            }
+            .header-buttons button {
+                font-size: 1.5em;
+                padding: 6px 12px;
+            }
+            .input-section {
+                padding: 10px;
+            }
+            textarea, .editable-div {
+                font-size: 12px;
+            }
+            button, select {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+        @media (max-width: 480px) {
+            .main-container {
+                max-width: 100vw;
+                padding: 5px;
+            }
+            .phone-preview {
+                height: 600px;
+            }
+            .header-buttons button {
+                font-size: 1.2em;
+                padding: 5px 10px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="header-buttons">
-        <button id="btn-3537" class="active" onclick="switchMode('3537')">✨ 3537 ✨</button>
-        <button id="btn-6167" onclick="switchMode('6167')">✨ 6167 ✨</button>
-    </div>
-
-    <div class="input-section">
-        <label>📝 主题</label>
-        <textarea id="title" placeholder="输入主题"></textarea>
-    </div>
-
-    <div class="input-section">
-        <label>📋 内容</label>
-        <div class="align-toolbar">
-            <button onclick="alignText('left')">⬅️ 左对齐</button>
-            <button onclick="alignText('center')">↔️ 居中对齐</button>
-            <button onclick="alignText('right')">➡️ 右对齐</button>
-            <button onclick="addTable()">📊 添加表格</button>
-            <button onclick="formatText('bold')">𝐁 加粗</button>
-            <button onclick="formatText('italic')">𝐼 斜体</button>
-            <button onclick="formatText('underline')">𝐔 下划线</button>
+    <div class="main-container">
+        <div class="header-buttons">
+            <button id="btn-3537" class="active" onclick="switchMode('3537')">✨ 3537 ✨</button>
+            <button id="btn-6167" onclick="switchMode('6167')">✨ 6167 ✨</button>
         </div>
-        <div id="content" class="editable-div" contenteditable="true" oninput="updateContent()"></div>
-        <div class="toolbar">
-            <button onclick="changeSelectedColor()">🎨 颜色</button>
-            <button onclick="addButton()">➕ 添加按钮</button>
-            <select id="emojiSelect" onchange="addEmoji()">
-                <option value="">选择游戏 Emoji</option>
-                <option value="JDB">JDB</option>
-                <option value="PG">PG</option>
-                <option value="CQ9">CQ9</option>
-                <option value="PP">PP</option>
-                <option value="JILI">JILI</option>
-                <option value="TADA">TADA</option>
-                <option value="WG">WG</option>
-            </select>
+
+        <div class="input-section">
+            <label>📝 主题</label>
+            <textarea id="title" placeholder="输入主题"></textarea>
+        </div>
+
+        <div class="input-section">
+            <label>📋 内容</label>
+            <div class="align-toolbar">
+                <button onclick="alignText('left')">⬅️ 左对齐</button>
+                <button onclick="alignText('center')">↔️ 居中对齐</button>
+                <button onclick="alignText('right')">➡️ 右对齐</button>
+                <button onclick="addTable()">📊 添加表格</button>
+                <button onclick="formatText('bold')">𝐁 加粗</button>
+                <button onclick="formatText('italic')">𝐼 斜体</button>
+                <button onclick="formatText('underline')">𝐔 下划线</button>
+            </div>
+            <div id="content" class="editable-div" contenteditable="true" oninput="updateContent()"></div>
+            <div class="toolbar">
+                <button onclick="changeSelectedColor()">🎨 颜色</button>
+                <button onclick="addButton()">➕ 添加按钮</button>
+                <select id="emojiSelect" onchange="addEmoji()">
+                    <option value="">选择游戏 Emoji</option>
+                    <option value="JDB">JDB</option>
+                    <option value="PG">PG</option>
+                    <option value="CQ9">CQ9</option>
+                    <option value="PP">PP</option>
+                    <option value="JILI">JILI</option>
+                    <option value="TADA">TADA</option>
+                    <option value="WG">WG</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="input-section">
+            <label>🔗 底部选项</label>
+            <div class="toolbar">
+                <button onclick="addJumpButton()">🔗 添加跳转按钮</button>
+                <select id="bannerSelect" onchange="addBanner()">
+                    <option value="">选择横幅</option>
+                    <option value="VIP活动">VIP活动</option>
+                    <option value="代理R$30">代理R$30</option>
+                    <option value="5%佣金">5%佣金</option>
+                    <option value="神秘奖金R$8888">神秘奖金R$8888</option>
+                    <option value="MAGNATA">MAGNATA</option>
+                    <option value="每日亏损">每日亏损</option>
+                    <option value="每周亏损">每周亏损</option>
+                    <option value="Nível">Nível</option>
+                    <option value="HAPPY">HAPPY</option>
+                    <option value="5号20号">5号20号</option>
+                    <option value="免费代码">免费代码</option>
+                </select>
+                <button onclick="addServiceButton()">📞 客服</button>
+                <button onclick="cancelBottomContent()">❌ 取消</button>
+            </div>
+            <div>底部预览:</div>
+            <div id="bottom-preview"></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="action-buttons">
+            <button onclick="copyCode()">📄 复制代码</button>
+        </div>
+        <pre id="output">请填写内容以生成代码</pre>
+    </div>
+
+    <div class="phone-preview">
+        <div class="phone-status-bar">
+            <div class="status-icons-left">
+                <span class="signal-icon"></span>
+                <span class="wifi-icon"></span>
+                <span class="notification-icon"></span>
+            </div>
+            <span id="phone-time" class="phone-time"></span>
+            <div class="status-icons-right">
+                <span class="bluetooth-icon"></span>
+                <span class="battery-icon"></span>
+            </div>
+        </div>
+        <div class="phone-content">
+            <div class="phone-header">通知</div>
+            <div class="phone-subheader">站内信</div>
+            <div class="phone-timestamp" id="phone-timestamp"></div>
+            <div class="phone-body" id="phone-body">
+                <div class="message-box" id="message-content"></div>
+                <div class="message-timestamp">2025/03/23 03:49:37</div>
+            </div>
+        </div>
+        <div class="phone-nav-bar">
+            <span>◄</span>
+            <span>⚪</span>
+            <span>▢</span>
         </div>
     </div>
-
-    <div class="input-section">
-        <label>🔗 底部选项</label>
-        <div class="toolbar">
-            <button onclick="addJumpButton()">🔗 添加跳转按钮</button>
-            <select id="bannerSelect" onchange="addBanner()">
-                <option value="">选择横幅</option>
-                <option value="VIP活动">VIP活动</option>
-                <option value="代理R$30">代理R$30</option>
-                <option value="5%佣金">5%佣金</option>
-                <option value="神秘奖金R$8888">神秘奖金R$8888</option>
-                <option value="MAGNATA">MAGNATA</option>
-                <option value="每日亏损">每日亏损</option>
-                <option value="每周亏损">每周亏损</option>
-                <option value="Nível">Nível</option>
-                <option value="HAPPY">HAPPY</option>
-                <option value="5号20号">5号20号</option>
-                <option value="免费代码">免费代码</option>
-            </select>
-            <button onclick="cancelBottomContent()">❌ 取消</button>
-        </div>
-        <div>底部预览:</div>
-        <div id="bottom-preview"></div>
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="action-buttons">
-        <button onclick="copyCode()">📄 复制代码</button>
-    </div>
-    <pre id="output">请填写内容以生成代码</pre>
 
     <script>
         const emojiMap = {
@@ -283,7 +511,7 @@
             "免费代码": { img: "https://res.cloudinary.com/daw3jjnsf/image/upload/v1742348920/6_z8m3dy.png", url: "https://3537s.com/#/giftcode?game_type=11001&game_mode=1&anim_type=2" }
         };
 
-        let currentMode = '3537'; // 默认模式为 3537
+        let currentMode = '3537';
         let bottomContent = "";
         let isJumpButton = false;
         let contentData = [];
@@ -304,31 +532,33 @@
         };
 
         function switchMode(mode) {
-            currentMode = mode;
+            if (currentMode !== mode) {
+                currentMode = mode;
+                localStorage.setItem('currentMode', mode);
+                location.reload();
+            }
+        }
+
+        window.onload = function() {
+            const savedMode = localStorage.getItem('currentMode') || '3537';
+            currentMode = savedMode;
             const btn3537 = document.getElementById('btn-3537');
             const btn6167 = document.getElementById('btn-6167');
             const bannerSelect = document.getElementById('bannerSelect');
 
-            // 更新按钮高亮状态
-            if (mode === '3537') {
+            if (savedMode === '3537') {
                 btn3537.classList.add('active');
                 btn6167.classList.remove('active');
-                bannerSelect.style.display = 'inline-block'; // 显示“选择横幅”
+                bannerSelect.style.display = 'inline-block';
                 document.title = '3537';
             } else {
                 btn3537.classList.remove('active');
                 btn6167.classList.add('active');
-                bannerSelect.style.display = 'none'; // 隐藏“选择横幅”
-                if (bottomContent && !isJumpButton) {
-                    bottomContent = ""; // 如果当前底部内容是横幅，切换到 6167 模式时清空
-                    document.getElementById("bottom-preview").innerHTML = "";
-                }
+                bannerSelect.style.display = 'none';
                 document.title = '6167';
             }
-
-            // 更新页面标题
             generateCode();
-        }
+        };
 
         document.getElementById("content").addEventListener("keydown", function(e) {
             if (e.key === "Enter") {
@@ -516,6 +746,11 @@
                 const alignDiv = document.createElement("div");
                 alignDiv.style.textAlign = alignment;
                 alignDiv.appendChild(fragment);
+                // 确保 div 内的 span 元素能够响应 text-align
+                const spans = alignDiv.getElementsByTagName("span");
+                for (let span of spans) {
+                    span.style.display = "inline-block";
+                }
                 range.insertNode(alignDiv);
 
                 const newRange = document.createRange();
@@ -537,6 +772,11 @@
                 const alignDiv = document.createElement("div");
                 alignDiv.style.textAlign = alignment;
                 alignDiv.appendChild(fragment);
+                // 确保 div 内的 span 元素能够响应 text-align
+                const spans = alignDiv.getElementsByTagName("span");
+                for (let span of spans) {
+                    span.style.display = "inline-block";
+                }
                 range.insertNode(alignDiv);
 
                 let nextSibling = alignDiv.nextSibling;
@@ -574,17 +814,37 @@
             const selectedText = range.toString();
             if (!selectedText) return;
 
-            const span = document.createElement("span");
-            if (format === "bold") {
-                span.style.fontWeight = "bold";
-            } else if (format === "italic") {
-                span.style.fontStyle = "italic";
-            } else if (format === "underline") {
-                span.style.textDecoration = "underline";
+            // 检查选中的内容是否已经包含在一个 span 标签中
+            let parentSpan = range.commonAncestorContainer.parentNode;
+            while (parentSpan && parentSpan.nodeName !== "SPAN" && parentSpan !== content) {
+                parentSpan = parentSpan.parentNode;
             }
-            span.textContent = selectedText;
-            range.deleteContents();
-            range.insertNode(span);
+
+            let span;
+            if (parentSpan && parentSpan.nodeName === "SPAN") {
+                // 如果已经有一个 span 标签，复用它并添加新样式
+                span = parentSpan;
+                if (format === "bold") {
+                    span.style.fontWeight = "bold";
+                } else if (format === "italic") {
+                    span.style.fontStyle = "italic";
+                } else if (format === "underline") {
+                    span.style.textDecoration = "underline";
+                }
+            } else {
+                // 否则创建一个新的 span 标签
+                span = document.createElement("span");
+                if (format === "bold") {
+                    span.style.fontWeight = "bold";
+                } else if (format === "italic") {
+                    span.style.fontStyle = "italic";
+                } else if (format === "underline") {
+                    span.style.textDecoration = "underline";
+                }
+                span.textContent = selectedText;
+                range.deleteContents();
+                range.insertNode(span);
+            }
 
             const newRange = document.createRange();
             newRange.setStartAfter(span);
@@ -606,7 +866,7 @@
 
             const content = document.getElementById("content");
             const table = document.createElement("table");
-            table.dataset.code = `<table style="width: 100%; border-collapse: collapse; margin: 10px 0;">`;
+            table.dataset.code = `<table style="width: 100%; max-width: 100%; border-collapse: collapse; margin: 10px 0; table-layout: fixed;">\n`;
 
             for (let i = 0; i < rows; i++) {
                 const tr = document.createElement("tr");
@@ -615,9 +875,9 @@
                     const td = document.createElement("td");
                     td.textContent = " ";
                     tr.appendChild(td);
-                    table.dataset.code += `<td style="border: 1px solid #FFFFFF; padding: 8px; text-align: center;"> </td>`;
+                    table.dataset.code += `<td style="border: 1px solid #FFFFFF; padding: 8px; text-align: center; word-break: break-all; overflow-wrap: break-word;"> </td>`;
                 }
-                table.dataset.code += "</tr>";
+                table.dataset.code += "</tr>\n";
                 table.appendChild(tr);
             }
             table.dataset.code += "</table>";
@@ -637,7 +897,7 @@
         }
 
         function changeSelectedColor() {
-             const content = document.getElementById("content");
+            const content = document.getElementById("content");
             const selection = window.getSelection();
             if (!selection.rangeCount || !selection.getRangeAt(0).commonAncestorContainer.parentNode.closest("#content")) return;
 
@@ -645,11 +905,25 @@
             const selectedText = range.toString();
             if (!selectedText) return;
 
-            const coloredSpan = document.createElement("span");
-            coloredSpan.style.color = "#CAFF70";
-            coloredSpan.textContent = selectedText;
-            range.deleteContents();
-            range.insertNode(coloredSpan);
+            // 检查选中的内容是否已经包含在一个 span 标签中
+            let parentSpan = range.commonAncestorContainer.parentNode;
+            while (parentSpan && parentSpan.nodeName !== "SPAN" && parentSpan !== content) {
+                parentSpan = parentSpan.parentNode;
+            }
+
+            let coloredSpan;
+            if (parentSpan && parentSpan.nodeName === "SPAN") {
+                // 如果已经有一个 span 标签，复用它并添加颜色样式
+                coloredSpan = parentSpan;
+                coloredSpan.style.color = "#CAFF70";
+            } else {
+                // 否则创建一个新的 span 标签
+                coloredSpan = document.createElement("span");
+                coloredSpan.style.color = "#CAFF70";
+                coloredSpan.textContent = selectedText;
+                range.deleteContents();
+                range.insertNode(coloredSpan);
+            }
 
             const defaultSpan = document.createElement("span");
             defaultSpan.style.color = "#000000";
@@ -735,6 +1009,16 @@
             select.value = "";
         }
 
+        function addServiceButton() {
+            const serviceImg = "https://res.cloudinary.com/daw3jjnsf/image/upload/v1742723669/GIF3_1_eow7ll.gif";
+            const serviceUrl = "https://3537.live?groupid=57dbaa4b3cd5ec107bd350ed5f63918c&language=pt";
+            bottomContent = `<a href="${serviceUrl}"><img src="${serviceImg}" alt="Atividade" style="display:block; margin: 20px auto; width: 100%; max-width: 1200px;"/></a></div>`;
+            isJumpButton = false;
+            const preview = document.getElementById("bottom-preview");
+            preview.innerHTML = `<img src="${serviceImg}" style="width: 300px; height: auto;"/>`;
+            generateCode();
+        }
+
         function cancelBottomContent() {
             bottomContent = "";
             isJumpButton = false;
@@ -747,21 +1031,41 @@
             const content = document.getElementById("content");
             contentData = [];
 
+            function mergeStyles(node) {
+                const styles = {};
+                let currentNode = node;
+                // 递归合并所有嵌套 span 的样式
+                while (currentNode && currentNode.nodeName === "SPAN") {
+                    if (currentNode.style.color) styles.color = currentNode.style.color;
+                    if (currentNode.style.fontWeight === "bold") styles.fontWeight = "bold";
+                    if (currentNode.style.fontStyle === "italic") styles.fontStyle = "italic";
+                    if (currentNode.style.textDecoration === "underline") styles.textDecoration = "underline";
+                    if (currentNode.style.display === "inline-block") styles.display = "inline-block";
+                    currentNode = currentNode.parentNode;
+                }
+                return styles;
+            }
+
             function processNode(node, isNestedDiv = false) {
                 if (node.nodeType === Node.TEXT_NODE) {
                     const text = node.textContent;
                     if (text) {
-                        contentData.push({ type: "text", value: text });
+                        const formattedText = text.replace(/\u00A0/g, " ");
+                        contentData.push({ type: "text", value: formattedText });
                     }
                 } else if (node.nodeName === "SPAN") {
-                    const styles = {};
-                    if (node.style.color) styles.color = node.style.color;
-                    if (node.style.fontWeight === "bold") styles.fontWeight = "bold";
-                    if (node.style.fontStyle === "italic") styles.fontStyle = "italic";
-                    if (node.style.textDecoration === "underline") styles.textDecoration = "underline";
-                    contentData.push({ type: "span", value: node.textContent, styles: styles });
+                    const styles = mergeStyles(node); // 合并嵌套的样式
+                    const childrenData = [];
+                    const tempContentData = contentData;
+                    contentData = [];
+                    node.childNodes.forEach(child => processNode(child));
+                    childrenData.push(...contentData);
+                    contentData = tempContentData;
+                    if (childrenData.length > 0) {
+                        contentData.push({ type: "span", children: childrenData, styles: styles });
+                    }
                 } else if (node.nodeName === "DIV" && node !== content) {
-                    contentData.push({ type: "div_start", align: node.style.textAlign });
+                    contentData.push({ type: "div_start", align: node.style.textAlign || "left" });
                     node.childNodes.forEach(child => processNode(child, true));
                     contentData.push({ type: "div_end" });
                 } else if (node.nodeName === "TABLE") {
@@ -770,7 +1074,7 @@
                 } else if (node.nodeName === "IMG") {
                     contentData.push({ type: "img", code: node.dataset.code });
                 } else if (node.nodeName === "BR") {
-                    contentData.push({ type: "br" });
+                    contentData.push({ type: "newline" });
                 } else {
                     node.childNodes.forEach(child => processNode(child, isNestedDiv));
                 }
@@ -779,22 +1083,24 @@
             function processTdContent(node) {
                 let tdContent = "";
                 if (node.nodeType === Node.TEXT_NODE) {
-                    tdContent += node.textContent;
+                    const text = node.textContent;
+                    tdContent += text.replace(/\u00A0/g, " ");
                 } else if (node.nodeName === "DIV") {
                     const divContent = Array.from(node.childNodes).map(child => processTdContent(child)).join('');
-                    tdContent += `<div style="text-align:${node.style.textAlign};">${divContent}</div>`;
+                    tdContent += `<div style="text-align:${node.style.textAlign || 'center'};">${divContent}</div>`;
                 } else if (node.nodeName === "SPAN") {
                     const styles = [];
                     if (node.style.color) styles.push(`color:${node.style.color}`);
                     if (node.style.fontWeight === "bold") styles.push(`font-weight:bold`);
                     if (node.style.fontStyle === "italic") styles.push(`font-style:italic`);
                     if (node.style.textDecoration === "underline") styles.push(`text-decoration:underline`);
+                    if (node.style.display === "inline-block") styles.push(`display:inline-block`);
                     const spanContent = Array.from(node.childNodes).map(child => processTdContent(child)).join('');
                     tdContent += `<span style="${styles.join(';')}">${spanContent}</span>`;
                 } else if (node.nodeName === "IMG") {
                     tdContent += node.dataset.code;
                 } else if (node.nodeName === "BR") {
-                    tdContent += "<br>";
+                    tdContent += "\n";
                 } else {
                     node.childNodes.forEach(child => {
                         tdContent += processTdContent(child);
@@ -804,7 +1110,7 @@
             }
 
             function generateTableCode(table) {
-                let code = `<table style="width: 100%; border-collapse: collapse; margin: 10px 0;">`;
+                let code = `<table style="width: 100%; max-width: 100%; border-collapse: collapse; margin: 10px 0; table-layout: fixed;">\n`;
                 const rows = table.getElementsByTagName("tr");
                 for (let i = 0; i < rows.length; i++) {
                     code += "<tr>";
@@ -815,9 +1121,9 @@
                         td.childNodes.forEach(child => {
                             tdContent += processTdContent(child);
                         });
-                        code += `<td style="border: 1px solid #FFFFFF; padding: 8px; text-align: center;">${tdContent}</td>`;
+                        code += `<td style="border: 1px solid #FFFFFF; padding: 8px; text-align: center; word-break: break-all; overflow-wrap: break-word;">${tdContent}</td>`;
                     }
-                    code += "</tr>";
+                    code += "</tr>\n";
                 }
                 code += "</table>";
                 return code;
@@ -828,53 +1134,79 @@
         }
 
         function generateCode() {
-            const title = document.getElementById("title").value.trim();
+            const title = document.getElementById("title").value;
             let output = `<div style="font-family:Arial,sans-serif;">`;
+
+            // 主题
             if (title) {
                 output += `<span style="color:#CAFF70;">${title}</span><br>\n`;
             }
+
+            // 内容
             output += `<span style="color:#FFFFFF;">`;
 
-            let inDiv = false;
-            contentData.forEach((item, index) => {
-                if (item.type === "text") {
-                    output += item.value;
-                } else if (item.type === "span") {
-                    const styles = [];
-                    if (item.styles.color) styles.push(`color:${item.styles.color}`);
-                    if (item.styles.fontWeight) styles.push(`font-weight:${item.styles.fontWeight}`);
-                    if (item.styles.fontStyle) styles.push(`font-style:${item.styles.fontStyle}`);
-                    if (item.styles.textDecoration) styles.push(`text-decoration:${item.styles.textDecoration}`);
-                    output += `<span style="${styles.join(';')}">${item.value}</span>`;
-                } else if (item.type === "div_start") {
-                    output += `<div style="text-align:${item.align};">`;
-                    inDiv = true;
-                } else if (item.type === "div_end") {
-                    output += `</div>`;
-                    inDiv = false;
-                } else if (item.type === "table") {
-                    output += item.code;
-                } else if (item.type === "img") {
-                    output += item.code;
-                } else if (item.type === "br") {
-                    if (!inDiv || (index < contentData.length - 1 && contentData[index + 1].type !== "div_end")) {
-                        output += "\n";
+            // 递归生成 HTML 结构
+            function generateNestedCode(data, startIndex) {
+                let html = "";
+                let i = startIndex;
+                while (i < data.length) {
+                    const item = data[i];
+                    if (item.type === "text") {
+                        html += item.value;
+                    } else if (item.type === "span") {
+                        const styles = [];
+                        if (item.styles.color) styles.push(`color:${item.styles.color}`);
+                        if (item.styles.fontWeight) styles.push(`font-weight:${item.styles.fontWeight}`);
+                        if (item.styles.fontStyle) styles.push(`font-style:${item.styles.fontStyle}`);
+                        if (item.styles.textDecoration) styles.push(`text-decoration:${item.styles.textDecoration}`);
+                        if (item.styles.display) styles.push(`display:${item.styles.display}`);
+                        html += `<span style="${styles.join(';')}">`;
+                        item.children.forEach(child => {
+                            if (child.type === "text") {
+                                html += child.value;
+                            } else if (child.type === "newline") {
+                                html += "\n";
+                            }
+                        });
+                        html += `</span>`;
+                    } else if (item.type === "div_start") {
+                        html += `<div style="text-align:${item.align};">`;
+                        // 递归处理 div 内部的内容
+                        const nestedResult = generateNestedCode(data, i + 1);
+                        html += nestedResult.html;
+                        i = nestedResult.endIndex - 1; // 跳到 div_end 的位置
+                    } else if (item.type === "div_end") {
+                        html += `</div>`;
+                        return { html, endIndex: i + 1 };
+                    } else if (item.type === "table") {
+                        html += item.code;
+                    } else if (item.type === "img") {
+                        html += item.code;
+                    } else if (item.type === "newline") {
+                        html += "\n";
                     }
+                    i++;
                 }
-            });
+                return { html, endIndex: i };
+            }
 
+            const result = generateNestedCode(contentData, 0);
+            output += result.html;
             output += "</span>";
 
+            // 底部内容（跳转按钮或横幅）
             if (bottomContent) {
                 if (isJumpButton) {
                     output += "\n\n";
                 }
                 output += bottomContent;
             } else {
-                output += "</div>";
+                output += "\n</div>";
             }
+
             generatedCode = output || "请填写内容以生成代码";
             document.getElementById("output").textContent = generatedCode;
+            updatePhonePreview();
         }
 
         function copyCode() {
@@ -898,8 +1230,43 @@
             }, 2000);
         }
 
+        function updatePhoneTime() {
+            const options = {
+                timeZone: 'Europe/London',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            };
+            const time = new Intl.DateTimeFormat('zh-CN', options).format(new Date());
+            document.getElementById("phone-time").textContent = time;
+
+            const timestampOptions = {
+                timeZone: 'Europe/London',
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            };
+            const timestamp = new Intl.DateTimeFormat('zh-CN', timestampOptions).format(new Date());
+            document.getElementById("phone-timestamp").textContent = `发布时间: ${timestamp}`;
+        }
+
+        function updatePhonePreview() {
+            const messageContent = document.getElementById("message-content");
+            if (generatedCode === "请填写内容以生成代码") {
+                messageContent.textContent = "暂无内容";
+            } else {
+                messageContent.innerHTML = generatedCode;
+            }
+            updatePhoneTime();
+        }
+
         document.getElementById("title").addEventListener("input", updateContent);
         generateCode();
+        setInterval(updatePhoneTime, 1000);
     </script>
 </body>
 </html>
