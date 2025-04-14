@@ -428,7 +428,7 @@
             <label>🔗 底部选项</label>
             <div class="toolbar">
                 <button onclick="addJumpButton()">🔗 添加跳转按钮</button>
-                <select id="bannerSelect" onchange="addBanner()">
+                <select id="bannerSelect" onchange="addBanner('3537')">
                     <option value="">选择横幅</option>
                     <option value="VIP活动">VIP活动</option>
                     <option value="代理R$30">代理R$30</option>
@@ -441,6 +441,22 @@
                     <option value="HAPPY">HAPPY</option>
                     <option value="5号20号">5号20号</option>
                     <option value="免费代码">免费代码</option>
+                </select>
+                <select id="bannerSelect6167" onchange="addBanner('6167')">
+                    <option value="">选择横幅</option>
+                    <option value="代理">代理</option>
+                    <option value="佣金">佣金</option>
+                    <option value="30%充值">30%充值</option>
+                    <option value="每日亏损">每日亏损</option>
+                    <option value="每周亏损">每周亏损</option>
+                    <option value="等级奖励">等级奖励</option>
+                    <option value="telegram频道">telegram频道</option>
+                    <option value="magnata">magnata</option>
+                    <option value="红包雨">红包雨</option>
+                    <option value="VIP">VIP</option>
+                    <option value="联系客服">联系客服</option>
+                    <option value="累计存款">累计存款</option>
+                    <option value="Jackpot">Jackpot</option>
                 </select>
                 <button onclick="addServiceButton()">📞 客服</button>
                 <button onclick="cancelBottomContent()">❌ 取消</button>
@@ -497,7 +513,7 @@
             "WG": "https://raw.githubusercontent.com/anhgotira/image-host/af2f3f832fbe8599290f2bc25c91692d6dd1b820/8.png"
         };
 
-        const bannerMap = {
+        const bannerMap3537 = {
             "VIP活动": { img: "https://raw.githubusercontent.com/anhgotira/image-host1/55642aa32f7b4b8895d04f7bf7bdec661e70bbad/1.png", url: "https://3537s.com/#/sd-vip?game_type=11001&game_mode=1&anim_type=2" },
             "代理R$30": { img: "https://raw.githubusercontent.com/anhgotira/image-host1/55642aa32f7b4b8895d04f7bf7bdec661e70bbad/13.png", url: "https://3537s.com/#/sdagency?game_type=11001&game_mode=1&anim_type=2" },
             "5%佣金": { img: "https://raw.githubusercontent.com/anhgotira/image-host1/55642aa32f7b4b8895d04f7bf7bdec661e70bbad/10.png", url: "https://3537s.com/#/home?game_type=11001&game_mode=1&anim_type=2" },
@@ -509,6 +525,22 @@
             "HAPPY": { img: "https://raw.githubusercontent.com/anhgotira/image-host1/55642aa32f7b4b8895d04f7bf7bdec661e70bbad/8.png", url: "https://3537s.com/#/sd-lottery?game_type=11001&game_mode=1&anim_type=2" },
             "5号20号": { img: "https://raw.githubusercontent.com/anhgotira/image-host1/55642aa32f7b4b8895d04f7bf7bdec661e70bbad/9.png", url: "https://3537s.com/#/sdsuper?game_type=11001&game_mode=1&anim_type=2" },
             "免费代码": { img: "https://raw.githubusercontent.com/anhgotira/image-host1/55642aa32f7b4b8895d04f7bf7bdec661e70bbad/6.png", url: "https://3537s.com/#/giftcode?game_type=11001&game_mode=1&anim_type=2" }
+        };
+
+        const bannerMap6167 = {
+            "代理": { img: "https://raw.githubusercontent.com/anhgotira/iMage-host6167/0e5adea4efcd2bc9a5585596700837f88069240d/15.png", url: "https://6167222.com/#/sd-promotion" },
+            "佣金": { img: "https://raw.githubusercontent.com/anhgotira/iMage-host6167/0e5adea4efcd2bc9a5585596700837f88069240d/16.png", url: "https://6167222.com/#/sd-cashback" },
+            "30%充值": { img: "https://raw.githubusercontent.com/anhgotira/iMage-host6167/0e5adea4efcd2bc9a5585596700837f88069240d/17.png", url: "https://6167222.com/#/sd-topup" },
+            "每日亏损": { img: "https://raw.githubusercontent.com/anhgotira/iMage-host6167/0e5adea4efcd2bc9a5585596700837f88069240d/18.png", url: "https://6167222.com/#/sd-rescue" },
+            "每周亏损": { img: "https://raw.githubusercontent.com/anhgotira/iMage-host6167/0e5adea4efcd2bc9a5585596700837f88069240d/19.png", url: "https://6167222.com/#/sdweekb" },
+            "等级奖励": { img: "https://raw.githubusercontent.com/anhgotira/iMage-host6167/0e5adea4efcd2bc9a5585596700837f88069240d/20.png", url: "https://6167222.com/#/sd-level" },
+            "telegram频道": { img: "https://raw.githubusercontent.com/anhgotira/iMage-host6167/0e5adea4efcd2bc9a5585596700837f88069240d/21.png", url: "https://6167222.com/#/giftcode" },
+            "magnata": { img: "https://raw.githubusercontent.com/anhgotira/iMage-host6167/0e5adea4efcd2bc9a5585596700837f88069240d/24.png", url: "https://6167222.com/#/cashwheel" },
+            "红包雨": { img: "https://raw.githubusercontent.com/anhgotira/iMage-host6167/0e5adea4efcd2bc9a5585596700837f88069240d/25.png", url: "https://6167222.com/#/home" },
+            "VIP": { img: "https://raw.githubusercontent.com/anhgotira/iMage-host6167/0e5adea4efcd2bc9a5585596700837f88069240d/26.png", url: "https://6167222.com/#/sd-vip" },
+            "联系客服": { img: "https://raw.githubusercontent.com/anhgotira/iMage-host6167/0e5adea4efcd2bc9a5585596700837f88069240d/27.png", url: "https://6167.live?groupid=31ffb8666d7a90cfed511c5636a1f00f&language=pt" },
+            "累计存款": { img: "https://raw.githubusercontent.com/anhgotira/iMage-host6167/refs/heads/main/22.png", url: "https://6167222.com/#/sdbdep" },
+            "Jackpot": { img: "https://raw.githubusercontent.com/anhgotira/iMage-host6167/refs/heads/main/23.png", url: "https://6167222.com/#/sdticket" }
         };
 
         let currentMode = '3537';
@@ -545,16 +577,19 @@
             const btn3537 = document.getElementById('btn-3537');
             const btn6167 = document.getElementById('btn-6167');
             const bannerSelect = document.getElementById('bannerSelect');
+            const bannerSelect6167 = document.getElementById('bannerSelect6167');
 
             if (savedMode === '3537') {
                 btn3537.classList.add('active');
                 btn6167.classList.remove('active');
                 bannerSelect.style.display = 'inline-block';
+                bannerSelect6167.style.display = 'none';
                 document.title = '3537';
             } else {
                 btn3537.classList.remove('active');
                 btn6167.classList.add('active');
                 bannerSelect.style.display = 'none';
+                bannerSelect6167.style.display = 'inline-block';
                 document.title = '6167';
             }
             generateCode();
@@ -996,8 +1031,9 @@
             generateCode();
         }
 
-        function addBanner() {
-            const select = document.getElementById("bannerSelect");
+        function addBanner(mode) {
+            const select = document.getElementById(mode === '3537' ? "bannerSelect" : "bannerSelect6167");
+            const bannerMap = mode === '3537' ? bannerMap3537 : bannerMap6167;
             const value = select.value;
             if (value && bannerMap[value]) {
                 bottomContent = `<a href="${bannerMap[value].url}"><img src="${bannerMap[value].img}" alt="Atividade" style="display:block; margin: 20px auto; width: 100%; max-width: 1200px;"/></a></div>`;
